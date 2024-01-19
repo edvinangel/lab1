@@ -1,16 +1,17 @@
 import java.awt.*;
 
-public class Car implements Moveable {
-    private final int nrDoors;
-    private final double enginePower;
+public abstract class Car implements Moveable {
+    private int nrDoors;
+    public final double enginePower; //Change to public to access in Car models
     private Color color;
     private String modelName;
-    private double currentSpeed;
+    public double currentSpeed; // Change to public to access in Car models
     private double x;
     private double y;
-    private boolean turnLeft, turnRight;
+    private boolean turnLeft, turnRight; // private för att dölja för användning
+    private int current_direction;
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, boolean turnLeft, boolean turnRight){
+    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int current_direction){
         this.nrDoors= nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -18,9 +19,8 @@ public class Car implements Moveable {
         this.currentSpeed= currentSpeed;
         this.x = x;
         this.y = y;
-        this.turnLeft = turnLeft;
-        this.turnRight = turnRight;
-    }
+        this.current_direction = 90;
+    } // Måste skapa konstruktorn själv
 
     public int getNrDoors(){
         return nrDoors;
@@ -48,10 +48,8 @@ public class Car implements Moveable {
     public void stopEngine(){
         currentSpeed = 0;
     }
-    public double speedFactor() {
-        return 1; //  overridden in the subclasses
-    }
 
+    public abstract double speedFactor();
 
     public double getX(){
         return x;
@@ -63,15 +61,23 @@ public class Car implements Moveable {
 
 
     @Override
-    public void turnLeft(){
-        turnLeft = true;
-        turnRight = false;
+    public void turnLeft() {
+        if (current_direction == 360 ||current_direction ==  -360){
+            current_direction = 0;
+        }else{
+            current_direction += 90; // Turn left by 90 degrees
+
+        }
     }
 
     @Override
-    public void turnRight(){
-        turnRight = true;
-        turnLeft = false;
+    public void turnRight() {
+        if (current_direction == (360) ||current_direction ==  -360){
+            current_direction = 0;
+        }else{
+            current_direction -= 90; // Turn right by 90 degrees
+
+        }
     }
 
     public boolean getTurnLeft(){
@@ -81,51 +87,19 @@ public class Car implements Moveable {
     public boolean getTurnRight(){
         return turnRight;
     }
+
     @Override
     public void move(){
-        if (turnRight){
-            x += currentSpeed;
-            y += currentSpeed;
-        }
-        else if (turnLeft){
-            x -= currentSpeed;
-            y += currentSpeed;
-        }
-        else{
-            y += currentSpeed;
-        }
+        double deltaX = Math.cos(Math.toRadians(current_direction)) * currentSpeed;
+        double deltaY = Math.sin(Math.toRadians(current_direction)) * currentSpeed;
+
+        x += deltaX;
+        y += deltaY;
     }
 
-    //Handling incraesing speed and error messages
-    public void incrementSpeed(double amount) {
-        try{
-            if (getCurrentSpeed() >= enginePower){
-                throw new Exception();
-            }
-            else{
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-            }
-        }catch (Exception e){
-            currentSpeed = enginePower;
-            System.out.println("The speed is maxxed out");
+    public abstract void incrementSpeed(double amount);
 
-
-        }
-    }
-    // Handling deareasing speed
-    public void decrementSpeed(double amount) {
-        try{
-            if (getCurrentSpeed() <= 0){
-                throw new Exception();
-            }else{
-                currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-            }
-
-        }catch (Exception e){
-            currentSpeed = 0;
-            System.out.println("Car is already still");
-        }
-    }
+    public abstract void decrementSpeed(double amount);
 
 
     public void brake(double amount){
@@ -138,6 +112,10 @@ public class Car implements Moveable {
         }catch(Exception e){
             System.out.println("Car cannot brake that much");
         }
+    }
+
+    public int getDirection(){
+        return current_direction;
     }
 
     public void gas(double amount){
