@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.math.BigDecimal;
 
 public abstract class Car implements Moveable {
     private int nrDoors;
@@ -11,15 +12,15 @@ public abstract class Car implements Moveable {
     private boolean turnLeft, turnRight; // private för att dölja för användning
     private int current_direction;
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int current_direction){
-        this.nrDoors= nrDoors;
+    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
+        this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.currentSpeed= currentSpeed;
+        this.currentSpeed = currentSpeed;
         this.x = x;
         this.y = y;
-        this.current_direction = 90;
+        this.current_direction = 90; // Set a default starting direction
     } // Måste skapa konstruktorn själv
 
     public int getNrDoors(){
@@ -62,22 +63,12 @@ public abstract class Car implements Moveable {
 
     @Override
     public void turnLeft() {
-        if (current_direction == 360 ||current_direction ==  -360){
-            current_direction = 0;
-        }else{
-            current_direction += 90; // Turn left by 90 degrees
-
-        }
+        current_direction = (current_direction + 90) % 360;
     }
 
     @Override
     public void turnRight() {
-        if (current_direction == (360) ||current_direction ==  -360){
-            current_direction = 0;
-        }else{
-            current_direction -= 90; // Turn right by 90 degrees
-
-        }
+        current_direction = (current_direction - 90 + 360) % 360;// Turn right by 90 degrees
     }
 
     public boolean getTurnLeft(){
@@ -93,8 +84,11 @@ public abstract class Car implements Moveable {
         double deltaX = Math.cos(Math.toRadians(current_direction)) * currentSpeed;
         double deltaY = Math.sin(Math.toRadians(current_direction)) * currentSpeed;
 
-        x += deltaX;
-        y += deltaY;
+        BigDecimal roundedDeltaX = new BigDecimal(deltaX).setScale(7, BigDecimal.ROUND_HALF_UP);
+        BigDecimal roundedDeltaY = new BigDecimal(deltaY).setScale(7, BigDecimal.ROUND_HALF_UP);
+
+        x += roundedDeltaX.doubleValue();
+        y += roundedDeltaY.doubleValue();
     }
 
     public abstract void incrementSpeed(double amount);
@@ -131,6 +125,11 @@ public abstract class Car implements Moveable {
 
     }
 
+
+
+
+
+}
 
 
 
