@@ -91,9 +91,24 @@ public abstract class Car implements Moveable {
         y += roundedDeltaY.doubleValue();
     }
 
-    public abstract void incrementSpeed(double amount);
+    public void incrementSpeed(double amount) {
+        if (getCurrentSpeed() >= enginePower) {
+            currentSpeed = enginePower;
+            System.out.println("The speed is maxed out");
+        } else {
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        }
+    }
 
-    public abstract void decrementSpeed(double amount);
+    // Handling decreasing speed
+    public void decrementSpeed(double amount) {
+        if (getCurrentSpeed() <= 0) {
+            currentSpeed = 0;
+            System.out.println("Car is already still");
+        } else {
+            currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        }
+    }
 
 
     public void brake(double amount){
@@ -124,14 +139,5 @@ public abstract class Car implements Moveable {
         }
 
     }
-
-
-
-
-
-}
-
-
-
 
 }
