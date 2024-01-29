@@ -146,13 +146,15 @@ public class TestAssertions{
     public void TestLeft(){
         Car car = new Volvo240(4, 100, Color.red, "Volvo240", 0, 10,20);
         car.turnLeft();
-        assertEquals(180, car.getDirection()); // Caps out at 100 because of "min" statement
+        assertEquals(-1, car.getXDirection(), 0.001);
+        assertEquals(0, car.getYDirection(), 0.001);// Caps out at 100 because of "min" statement
     }
     @Test
     public void TestRight(){
         Car car = new Volvo240(4, 100, Color.red, "Volvo240", 0, 10,20);
         car.turnRight(); // 90 to 0
-        assertEquals(0, car.getDirection());
+        assertEquals(1, car.getXDirection(), 0.001);
+        assertEquals(0, car.getYDirection(), 0.001);
 
     }
 

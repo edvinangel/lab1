@@ -2,11 +2,23 @@ import java.awt.*;
 
 public class Scania extends Truck{
 
+    private static double width = 3;
+    private static double length = 10;
 
     private static double maxAngle = 70;
 
     public Scania(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
+    }
+
+    @Override
+    public double getWidth() {
+        return width;
+    }
+
+    @Override
+    public double getLength() {
+        return length;
     }
 
     public void raisePlatform(){

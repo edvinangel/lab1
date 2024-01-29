@@ -23,4 +23,60 @@ public class TestAssertionsLab2 {
     }
 
 
+    @Test
+    public void testLoadCars(){
+
+        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
+        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
+        transport.lowerPlatform();
+        List<Car> carList = new ArrayList<>();
+        carList.add(saab);
+        transport.loadCar(saab);
+        assertEquals(carList, transport.getCarsLoaded());
+
+    }
+
+
+    @Test
+    public void testUnloadCars(){
+
+        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
+        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
+        transport.lowerPlatform();
+        List<Car> carList = new ArrayList<>();
+        carList.add(saab);
+        transport.loadCar(saab);
+        assertEquals(carList, transport.getCarsLoaded());
+
+
+        carList.removeLast(); // Töm båda listorna
+        transport.unloadCar();
+        assertEquals(carList,transport.getCarsLoaded());
+
+    }
+
+    @Test
+    public void testMovement(){
+
+        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
+        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
+        transport.lowerPlatform();
+        transport.loadCar(saab);
+
+        transport.startEngine();
+        transport.gas(0.5);
+        transport.turnRight();
+
+        assertEquals(saab.getX(),transport.getX(), 0.001);
+        assertEquals(saab.getY(), transport.getY(), 0.001);
+
+    }
+
+
+
+
+
+
+
+
 }

@@ -1,8 +1,13 @@
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.FixedWidth;
+
 import java.awt.*;
 
 public class Saab95 extends Car {
 
     private boolean turboOn;
+    private static final double width = 1.5;
+
+    private static final double length = 5;
 
     public Saab95(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
@@ -16,6 +21,15 @@ public class Saab95 extends Car {
     public void setTurboOff(){
         this.turboOn = false;
     }
+
+    public double getWidth(){
+        return width;
+    }
+
+    public double getLength(){
+        return length;
+    }
+
 
     @Override
     public double speedFactor() {

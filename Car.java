@@ -2,6 +2,10 @@ import java.awt.*;
 import java.math.BigDecimal;
 
 public abstract class Car implements Moveable {
+
+    private static double width;
+    private static double length;
+
     private int nrDoors;
     public final double enginePower; //Change to public to access in Car models
     private Color color;
@@ -9,8 +13,9 @@ public abstract class Car implements Moveable {
     public double currentSpeed; // Change to public to access in Car models
     private double x;
     private double y;
-    private boolean turnLeft, turnRight; // private för att dölja för användning
-    private int current_direction;
+    private int x_direction, y_direction; // private för att dölja för användning
+
+
 
     public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         this.nrDoors = nrDoors;
@@ -20,7 +25,9 @@ public abstract class Car implements Moveable {
         this.currentSpeed = currentSpeed;
         this.x = x;
         this.y = y;
-        this.current_direction = 90; // Set a default starting direction
+        this.x_direction = 0;
+        this.y_direction = 1;
+        // Set a default starting direction
     } // Måste skapa konstruktorn själv
 
     public int getNrDoors(){
@@ -52,6 +59,12 @@ public abstract class Car implements Moveable {
 
     public abstract double speedFactor();
 
+    public abstract double getWidth();
+
+    public abstract double getLength();
+
+
+
     public double getX(){
         return x;
     }
@@ -61,34 +74,66 @@ public abstract class Car implements Moveable {
     }
 
 
+    public void setX(double new_x){
+        x = new_x;
+    }
+
+    public void setY(double new_y){
+        y = new_y;
+    }
+
+
+    public double getXDirection(){
+        return x_direction;
+    }
+
+    public double getYDirection(){
+        return y_direction;
+    }
+
     @Override
     public void turnLeft() {
-        current_direction = (current_direction + 90) % 360;
+        if (x_direction == 0 && y_direction == -1 ){
+            x_direction = 1;
+            y_direction = 0;
+        } else if (x_direction == -1 && y_direction == 0) {
+            x_direction = 0;
+            y_direction = -1;
+        } else if (x_direction == 0 && y_direction == 1) {
+            x_direction = -1;
+            y_direction = 0;
+        } else if (x_direction == 1 && y_direction == 0) {
+            x_direction = 0;
+            y_direction = 1;
+
+        }
+
+
     }
 
     @Override
     public void turnRight() {
-        current_direction = (current_direction - 90 + 360) % 360;// Turn right by 90 degrees
-    }
+        if (x_direction == 0 && y_direction == -1 ){
+            x_direction = -1;
+            y_direction = 0;
+        } else if (x_direction == -1 && y_direction == 0) {
+            x_direction = 0;
+            y_direction = 1;
+        } else if (x_direction == 0 && y_direction == 1) {
+            x_direction = 1;
+            y_direction = 0;
+        } else if (x_direction == 1 && y_direction == 0) {
+            x_direction = 0;
+            y_direction = -1;
+        }
 
-    public boolean getTurnLeft(){
-        return turnLeft;
-    }
 
-    public boolean getTurnRight(){
-        return turnRight;
     }
 
     @Override
     public void move(){
-        double deltaX = Math.cos(Math.toRadians(current_direction)) * currentSpeed;
-        double deltaY = Math.sin(Math.toRadians(current_direction)) * currentSpeed;
-
-        BigDecimal roundedDeltaX = new BigDecimal(deltaX).setScale(7, BigDecimal.ROUND_HALF_UP);
-        BigDecimal roundedDeltaY = new BigDecimal(deltaY).setScale(7, BigDecimal.ROUND_HALF_UP);
-
-        x += roundedDeltaX.doubleValue();
-        y += roundedDeltaY.doubleValue();
+        x += x_direction * currentSpeed;
+        y += y_direction * currentSpeed;
     }
 
     public void incrementSpeed(double amount) {
@@ -123,9 +168,6 @@ public abstract class Car implements Moveable {
         }
     }
 
-    public int getDirection(){
-        return current_direction;
-    }
 
     public void gas(double amount){
         try{
