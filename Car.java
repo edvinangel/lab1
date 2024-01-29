@@ -113,11 +113,11 @@ public abstract class Car implements Moveable {
 
     public void brake(double amount){
         try{
-        if (amount <= 0 || amount > 1) {
-            throw new Exception();
-        } else {
-            decrementSpeed(amount);
-        }
+            if (amount <= 0 || amount > 1) {
+                throw new Exception();
+            } else {
+                decrementSpeed(amount);
+            }
         }catch(Exception e){
             System.out.println("Car cannot brake that much");
         }
@@ -139,5 +139,9 @@ public abstract class Car implements Moveable {
         }
 
     }
+
+
+
+
 
 }
