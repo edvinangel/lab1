@@ -64,6 +64,9 @@ public abstract class Car implements Moveable {
     public abstract double getLength();
 
 
+    public String getModelName(){
+        return this.modelName;
+    }
 
     public double getX(){
         return x;

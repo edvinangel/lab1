@@ -16,9 +16,6 @@ public class CarTransport extends Truck {
 
     private ArrayList<Car> carsLoaded;
 
-    private double currentDirection;
-
-
 
     public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int maxCapacity) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
@@ -61,7 +58,7 @@ public class CarTransport extends Truck {
     public void loadCar(Car cars){
         if (maxCapacity > numLoaded && platformPosition){
             if (cars.getWidth() < 2.5 && cars.getLength() < 6){
-                if (Math.abs(cars.getX() - this.getX()) < 10  && Math.abs(cars.getY() - this.getY()) < 10){
+                if (Math.abs(cars.getX() - this.getX()) < 5  && Math.abs(cars.getY() - this.getY()) < 5){
                     numLoaded += 1;
                     carsLoaded.add(cars);
                     System.out.println("Car loaded");
@@ -100,4 +97,10 @@ public class CarTransport extends Truck {
     public double getLength() {
         return length;
     }
+
+
+    public int getNumLoaded(){
+        return this.numLoaded;
+    }
+
 }
