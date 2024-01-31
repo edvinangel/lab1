@@ -16,6 +16,8 @@ public class CarTransport extends Truck {
 
     private ArrayList<Car> carsLoaded;
 
+    private Platform platform;
+
 
     public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int maxCapacity) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
@@ -23,37 +25,30 @@ public class CarTransport extends Truck {
         this.platformPosition = false;
         this.numLoaded = 0;
         this.carsLoaded = new ArrayList<>();
+
+        this.platform = new Platform(false, this);
     }
 
 
     @Override
     public void move(){
+        if (this.platform.loadable == true) {
+            double new_x = this.getX() + this.getXDirection() * currentSpeed;
+            double new_y = this.getY() + this.getYDirection() * currentSpeed;
 
-        double new_x = this.getX() + this.getXDirection() * currentSpeed;
-        double new_y = this.getY() + this.getYDirection() * currentSpeed;
-
-        this.setX(new_x);
-        this.setY(new_y);
+            this.setX(new_x);
+            this.setY(new_y);
 
 
-        for (Car car : carsLoaded){
-            car.setX(new_x);
-            car.setY(new_y);
+            for (Car car : carsLoaded) {
+                car.setX(new_x);
+                car.setY(new_y);
+            }
+        }else{
+        System.out.println("Can not move when platform is lowered");
         }
 
     }
-
-    @Override
-    public void raisePlatform() {
-        this.platformPosition = false;
-
-    }
-
-    @Override
-    public void lowerPlatform() {
-        this.platformPosition = true;
-    }
-
 
     public void loadCar(Car cars){
         if (maxCapacity > numLoaded && platformPosition){

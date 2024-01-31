@@ -1,11 +1,11 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Workshop {
+public class Workshop<A extends Car> {
 
     private int maxLoad;
-    private ArrayList<String> allowedTypes;
-    private ArrayList<Car> loadedCars;
+    private ArrayList<A> allowedTypes;
+    private ArrayList<A> loadedCars;
     private double x;
     private double y;
     private String name;
@@ -19,16 +19,15 @@ public class Workshop {
         this.x = x;
         this.y = y;
 
-
-        this.loadedCars = new ArrayList<Car>();
-        this.allowedTypes = new ArrayList<String>();
+        this.loadedCars = new ArrayList<>();
+        this.allowedTypes = new ArrayList<>();
     }
 
-    public void setAllowedTypes(String input){
-        allowedTypes.add(input);
+    public void addAllowedTypes(A carType) {
+        allowedTypes.add(carType);
     }
 
-    public void recieveCar(Car car){
+    public void recieveCar(A car){
         if (currentLoad < maxLoad){
             if (this.allowedTypes.isEmpty()){
                 loadedCars.add(car);
@@ -48,7 +47,7 @@ public class Workshop {
 
         }
 
-    public Car pickUp(Car car){
+    public Car pickUp(A car){
         if (loadedCars.contains(car)){
             loadedCars.remove(car);
             currentLoad -= 1;

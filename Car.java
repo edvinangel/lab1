@@ -3,9 +3,6 @@ import java.math.BigDecimal;
 
 public abstract class Car implements Moveable {
 
-    private static double width;
-    private static double length;
-
     private int nrDoors;
     public final double enginePower; //Change to public to access in Car models
     private Color color;
@@ -30,7 +27,7 @@ public abstract class Car implements Moveable {
         // Set a default starting direction
     } // Måste skapa konstruktorn själv
 
-    public int getNrDoors(){
+    protected int getNrDoors(){
         return nrDoors;
     }
     public double getEnginePower(){
@@ -57,11 +54,7 @@ public abstract class Car implements Moveable {
         currentSpeed = 0;
     }
 
-    public abstract double speedFactor();
-
-    public abstract double getWidth();
-
-    public abstract double getLength();
+    protected abstract double speedFactor();
 
 
     public String getModelName(){

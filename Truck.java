@@ -1,28 +1,33 @@
 import java.awt.*;
 
-public abstract class Truck extends Car{
+public class Truck extends Car{
 
-    public static double platformAngle = 0;
+    private TruckPlatform truckPlatform;
 
     public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
+
+        this.truckPlatform = new TruckPlatform(false, 0, 70, this);
     }
-
-    abstract void raisePlatform();
-
-    abstract void lowerPlatform();
-
-    public double getPlatformAngle(){
-        return platformAngle;
-    }
-
 
     @Override
     public double speedFactor() {
         return getEnginePower() * 0.01;
     }
 
+    @Override
+    public void move(){
+        if (truckPlatform.getPlatformAngle() != 0){
+            System.out.println("Can only move when platform angle is zero");
+        }else{
+            double new_x = this.getX() + this.getXDirection() * currentSpeed;
+            double new_y = this.getY() + this.getYDirection() * currentSpeed;
+
+            this.setX(new_x);
+            this.setY(new_y);
+        }
 
 
-
+    }
+    
 }
