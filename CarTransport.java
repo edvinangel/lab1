@@ -8,94 +8,72 @@ public class CarTransport extends Truck {
 
     private static final double length = 15;
 
-    private int maxCapacity;
-
-    private boolean platformPosition;
-
-    private int numLoaded;
-
-    private ArrayList<Car> carsLoaded;
-
     private Platform platform;
 
+    private Loadable load;
 
     public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int maxCapacity) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
-        this.maxCapacity = maxCapacity;
-        this.platformPosition = false;
-        this.numLoaded = 0;
-        this.carsLoaded = new ArrayList<>();
 
+        this.load = new Loadable(maxCapacity, x, y);
         this.platform = new Platform(false, this);
     }
 
 
     @Override
     public void move(){
-        if (this.platform.loadable == true) {
+        if (this.platform.loadable) {
             double new_x = this.getX() + this.getXDirection() * currentSpeed;
             double new_y = this.getY() + this.getYDirection() * currentSpeed;
 
             this.setX(new_x);
             this.setY(new_y);
 
+            this.load.moveCars();
 
-            for (Car car : carsLoaded) {
-                car.setX(new_x);
-                car.setY(new_y);
-            }
         }else{
         System.out.println("Can not move when platform is lowered");
         }
 
     }
 
-    public void loadCar(Car cars){
-        if (maxCapacity > numLoaded && platformPosition){
-            if (cars.getWidth() < 2.5 && cars.getLength() < 6){
-                if (Math.abs(cars.getX() - this.getX()) < 5  && Math.abs(cars.getY() - this.getY()) < 5){
-                    numLoaded += 1;
-                    carsLoaded.add(cars);
-                    System.out.println("Car loaded");
-                }else{
-                    System.out.println("Car is not close enough");
-                }
-            }else{
-                System.out.println("Car size is too big");
+    public void loadCar(Car car){
+        if (platform.loadable) {
+            if (car.getWidth() < 2.5 && car.getLength() < 6)
+            {
+            this.load.loadCar(car);}else{
+                System.out.println("Car needs to be closer");
             }
         }else{
-            System.out.println("Max Capacity Reached");
+            System.out.println("Platform is not in the right position");
         }
     }
 
     public void unloadCar(){
-        if (!carsLoaded.isEmpty()){
-            Car car = carsLoaded.removeLast();
-            numLoaded -= 1;
-            car.setX(this.getX() + 1);
-            car.setY(this.getY() + 1);
+        if (this.getCurrentSpeed() == 0){
+            this.load.unLoadCar();
         }else{
-            System.out.println("You have unloaded all cars");
+            System.out.println("You need to be still to unload car");
         }
     }
 
-    public ArrayList<Car> getCarsLoaded(){
-        return this.carsLoaded;
+    public void lowerPlatform(){
+        this.platform.lowerPlatform();
     }
 
-    @Override
+    public void raisePlatform(){
+        this.platform.raisePlatform();
+    }
+
+
     public double getWidth() {
         return width;
     }
 
-    @Override
+
     public double getLength() {
         return length;
     }
 
-
-    public int getNumLoaded(){
-        return this.numLoaded;
-    }
 
 }

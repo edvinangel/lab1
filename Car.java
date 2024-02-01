@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 
 public abstract class Car implements Moveable {
 
+
     private int nrDoors;
     public final double enginePower; //Change to public to access in Car models
     private Color color;
@@ -177,6 +178,11 @@ public abstract class Car implements Moveable {
         }
 
     }
+
+
+    public abstract double getWidth(){};
+
+    public abstract double getLength(){};
 
 
 
