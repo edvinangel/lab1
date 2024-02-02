@@ -3,6 +3,8 @@ public class Platform {
     public boolean loadable;
     private Truck truck;
 
+
+
     public Platform(boolean loadable, Truck truck){
         this.loadable = false;
         this.truck = truck;

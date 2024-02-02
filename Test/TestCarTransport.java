@@ -17,7 +17,7 @@ public class TestCarTransport {
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
-        assertEquals(carList, transport.getCarsLoaded());
+        assertEquals(carList, transport.load.getCarsLoaded());
     }
 
     @Test
@@ -29,11 +29,11 @@ public class TestCarTransport {
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
-        assertEquals(carList, transport.getCarsLoaded());
+        assertEquals(carList, transport.load.getCarsLoaded());
 
         carList.removeLast(); // Töm båda listorna
         transport.unloadCar();
-        assertEquals(carList,transport.getCarsLoaded());
+        assertEquals(carList,transport.load.getCarsLoaded());
     }
 
     @Test
@@ -78,17 +78,7 @@ public class TestCarTransport {
         transport.loadCar(saab); // Should return that it is not closed enough
     }
 
-    @Test
-    public void testWidth(){
-        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 15,0, 10);
-        assertEquals(4, transport.getWidth(), 0.001);
-    }
 
-    @Test
-    public void testLength(){
-        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 15,0, 10);
-        assertEquals(15, transport.getLength(), 0.001);
-    }
 
     @Test
     public void testNumLoaded(){
@@ -98,9 +88,9 @@ public class TestCarTransport {
         transport.loadCar(saab); // Should return that it is not closed enough
 
 
-        assertEquals( 1 , transport.getNumLoaded(), 0.001);
+        assertEquals( 1 , transport.load.getNumLoaded(), 0.001);
         transport.unloadCar();
-        assertEquals( 0 , transport.getNumLoaded(), 0.001);
+        assertEquals( 0 , transport.load.getNumLoaded(), 0.001);
     }
 
 }

@@ -4,6 +4,14 @@ import java.math.BigDecimal;
 public abstract class Car implements Moveable {
 
 
+    public Size size;
+
+    public enum Size {
+        SMALL,
+        MEDIUM,
+        LARGE
+    };
+    
     private int nrDoors;
     public final double enginePower; //Change to public to access in Car models
     private Color color;
@@ -11,7 +19,7 @@ public abstract class Car implements Moveable {
     public double currentSpeed; // Change to public to access in Car models
     private double x;
     private double y;
-    private int x_direction, y_direction; // private för att dölja för användning
+    private int x_direction, y_direction; // private förax att dölja för användning
 
 
 
@@ -57,6 +65,8 @@ public abstract class Car implements Moveable {
 
     protected abstract double speedFactor();
 
+
+    protected abstract Size getSize();
 
     public String getModelName(){
         return this.modelName;
@@ -179,10 +189,6 @@ public abstract class Car implements Moveable {
 
     }
 
-
-    public abstract double getWidth(){};
-
-    public abstract double getLength(){};
 
 
 

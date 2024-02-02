@@ -5,9 +5,10 @@ import java.awt.*;
 public class Saab95 extends Car {
 
     private boolean turboOn;
-    private static final double width = 1.5;
 
-    private static final double length = 5;
+    public final static Size size = Size.SMALL;
+
+
 
     public Saab95(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
@@ -22,19 +23,16 @@ public class Saab95 extends Car {
         this.turboOn = false;
     }
 
-    public double getWidth(){
-        return width;
-    }
-
-    public double getLength(){
-        return length;
-    }
-
 
     @Override
     public double speedFactor() {
         double turbo = turboOn ? 1.3 : 1;
         return getEnginePower() * 0.01 * turbo;
+    }
+
+    @Override
+    protected Size getSize() {
+        return size;
     }
 
 }

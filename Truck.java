@@ -1,8 +1,9 @@
 import java.awt.*;
 
 public class Truck extends Car{
+    public final static Size size = Size.LARGE;
 
-    private TruckPlatform truckPlatform;
+    public TruckPlatform truckPlatform;
 
     public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
@@ -28,6 +29,11 @@ public class Truck extends Car{
         }
 
 
+    }
+
+    @Override
+    protected Size getSize() {
+        return size;
     }
     
 }

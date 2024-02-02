@@ -69,6 +69,10 @@ public class Loadable {
         }
     }
 
+    public int getNumLoaded(){
+        return this.numLoaded;
+    }
+
 
 
 
