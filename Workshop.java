@@ -1,7 +1,6 @@
-import java.awt.*;
 import java.util.ArrayList;
 
-public class Workshop<A extends Car> implements Loadable2<A> {
+public class Workshop<A extends Car> implements Loadable<A> {
 
     private int maxLoad;
     public ArrayList<A> loadedCars;

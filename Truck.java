@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Truck extends Car{
+public abstract class Truck extends Car{
 
 
     public final static Size size = Size.LARGE;
@@ -22,17 +22,9 @@ public class Truck extends Car{
         return size;
     }
 
-    public void lowerPlatform(){
-        if (currentSpeed != 0){
-            System.out.println("Car cannot move when lowering platform");
-        }else{
-            this.truckPlatform.lowerPlatform();}
-    }
+    public abstract void lowerPlatform();
+    public abstract void raisePlatform();
 
-    public void raisePlatform(){
-        if (currentSpeed != 0){
-            System.out.println("Car cannot move when raising platform");
-        }else{
-            truckPlatform.raisePlatform();}
-    }
+
+
 }

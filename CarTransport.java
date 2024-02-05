@@ -1,12 +1,9 @@
 import java.awt.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class CarTransport extends Truck implements Loadable2<Car>{
+public class CarTransport extends Truck implements Loadable<Car> {
 
-    // har två plattformar
-    public Platform platform;
+    private boolean platformActive = true;
 
     private ArrayList<Car> carsLoaded; // private
     private int maxCapacity;
@@ -16,22 +13,20 @@ public class CarTransport extends Truck implements Loadable2<Car>{
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
         this.maxCapacity = maxCapacity;
 
-        this.platform = new Platform(false);
         this.carsLoaded = new ArrayList<Car>();
         this.numLoaded = 0;
 
     }
 
+    public boolean getPlatformActive(){
+        return platformActive;
+    }
+
 
     @Override
     public void move(){
-        if (this.platform.loadable) {
-            double new_x = this.getX() + this.getXDirection() * currentSpeed;
-            double new_y = this.getY() + this.getYDirection() * currentSpeed;
-
-            this.setX(new_x);
-            this.setY(new_y);
-
+        if (getPlatformActive()) {
+            super.move();
             this.moveCars();
 
         }else{
@@ -44,10 +39,9 @@ public class CarTransport extends Truck implements Loadable2<Car>{
         return carsLoaded;
     }
 
-
     @Override
     public void loadCar(Car car) {
-        if (platform.loadable) {
+        if (platformActive) {
             if ((car.getSize() == Size.MEDIUM || car.getSize() == Size.SMALL)) {
                 if (maxCapacity > (carsLoaded.size() + 1)){
                     if (Math.abs(car.getX() - this.getX()) < 5  && Math.abs(car.getY() - this.getY()) < 5){
@@ -86,9 +80,7 @@ public class CarTransport extends Truck implements Loadable2<Car>{
     }
 
 
-
-
-    public void moveCars(){ // Testa noga
+    public void moveCars(){
         for (Car car : carsLoaded) {
             car.setX(this.getX());
             car.setY(this.getY());
@@ -100,14 +92,17 @@ public class CarTransport extends Truck implements Loadable2<Car>{
         if (currentSpeed != 0){
             System.out.println("Car cannot move when lowering platform");
         }else{
-            platform.lowerPlatform();}
+            platformActive = true;
+
+        }
     }
 
     public void raisePlatform(){
         if (currentSpeed != 0){
             System.out.println("Car cannot move when raising platform");
         }else{
-            platform.raisePlatform();}
+            platformActive = false;
+        }
     }
 }
 

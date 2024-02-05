@@ -1,24 +1,48 @@
 import java.awt.*;
 
-public class Scania extends Truck{
+public class Scania extends Truck {
 
-    public TruckPlatform truckPlatform;
-
+    private final double platformRaiseAngle = 5;
+    private double platformAngle;
 
     public Scania(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
-        this.truckPlatform = new TruckPlatform(false, 0, 70);
+        this.platformAngle = 0;
 
     }
+
+    public double getPlatformAngle(){
+        return this.platformAngle;
+    }
+
+
+
     @Override
-    public void move(){
-        if (this.truckPlatform.getPlatformAngle() != 0){
+    public void move() {
+        if (this.getPlatformAngle() != 0) {
             System.out.println("Can only move when platform angle is zero");
-        }else{
+        } else {
             super.move();
 
+        }}
+
+        public void lowerPlatform(){
+            if (currentSpeed != 0) {
+                System.out.println("Car cannot move when lowering platform");
+            } else {
+                platformAngle = Math.max(this.platformAngle -= 5, 0);
+            }
+        }
+
+        public void raisePlatform(){
+            if (currentSpeed != 0) {
+                System.out.println("Car cannot move when raising platform");
+            } else {
+                platformAngle = Math.min(this.platformAngle += 5, 70);
+            }
         }
     }
+
 
 
 
