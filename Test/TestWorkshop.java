@@ -62,10 +62,14 @@ public class TestWorkshop {
     }
 
     @Test
-    public void testWorkshop(){
+    public void testWorkshopType(){
 
-        Workshop<Saab95> = new Workshop<>(2, 0, "Workshop1", 5, 5);
+        Workshop<Saab95> workshop = new Workshop<>(2, 0, "Workshop1", 5, 5);
+        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
+        Volvo240 volvo = new Volvo240(2, 100, Color.black, "Volvo240", 3, 7,0);
 
+        workshop.recieveCar(saab);
+        workshop.recieveCar(volvo);
 
     }
 }
