@@ -1,11 +1,10 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Workshop<A extends Car> {
+public class Workshop<A extends Car> implements Loadable2<A> {
 
     private int maxLoad;
-    private ArrayList<A> allowedTypes;
-    private ArrayList<A> loadedCars;
+    public ArrayList<A> loadedCars;
     private double x;
     private double y;
     private String name;
@@ -19,35 +18,25 @@ public class Workshop<A extends Car> {
         this.x = x;
         this.y = y;
 
-        this.loadedCars = new ArrayList<>();
-        this.allowedTypes = new ArrayList<>();
+        this.loadedCars = new ArrayList<A>();
     }
 
-    public void addAllowedTypes(A carType) {
-        allowedTypes.add(carType);
-    }
 
-    public void recieveCar(A car){
+    @Override
+    public void loadCar(A car){
         if (currentLoad < maxLoad){
-            if (this.allowedTypes.isEmpty()){
-                loadedCars.add(car);
+                this.loadedCars.add(car);
                 currentLoad += 1;
                 System.out.println("Car loaded");
 
-            } else if (allowedTypes.contains(car.getModelName())) {
-                    loadedCars.add(car);
-                    currentLoad += 1;
             }else{
-                System.out.println("Car type not allowed");
-            }
-        }
-        else{
                 System.out.println("Max capacity is reached");
             }
-
         }
 
-    public Car pickUp(A car){
+        
+        @Override
+    public A unloadCar(A car){
         if (loadedCars.contains(car)){
             loadedCars.remove(car);
             currentLoad -= 1;

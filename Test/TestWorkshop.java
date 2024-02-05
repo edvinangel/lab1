@@ -9,32 +9,29 @@ public class TestWorkshop {
     @Test
     public void testWorkShopCapacity() {
         Workshop<Saab95> workshop = new Workshop<>(2, 0, "Workshop1", 5, 5);
-        workshop.addAllowedTypes(Volvo240);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
-        Volvo240 volvo = new Volvo240(2, 100, Color.black, "Saab95", 10, 5, 5);
 
         Saab95 saab1 = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
         Saab95 saab2 = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
 
-        workshop.recieveCar(saab);
-        workshop.recieveCar(volvo);
-        workshop.recieveCar(saab1);
-        workshop.recieveCar(saab2); // capacity reached
+
+        workshop.loadCar(saab);
+        workshop.loadCar(saab1);
+        workshop.loadCar(saab2); // capacity reached
     }
 
     @Test
     public void testWorkShopReturnCar() {
-        Workshop workshop = new Workshop(10, 0, "Workshop1", 5, 5);
-        workshop.addAllowedTypes("Saab95");
-        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
-        Saab95 saab1 = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
-        Saab95 saab2 = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
+        Workshop<Saab95> workshop = new Workshop<>(10, 0, "Workshop1", 5, 5);
+        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 0, 5, 5);
+        Saab95 saab1 = new Saab95(2, 100, Color.black, "Saab95", 0, 5, 5);
+        Saab95 saab2 = new Saab95(2, 100, Color.black, "Saab95", 0, 5, 5);
 
-        workshop.recieveCar(saab);
-        workshop.recieveCar(saab1);
-        workshop.recieveCar(saab2);
+        workshop.loadCar(saab);
+        workshop.loadCar(saab1);
+        workshop.loadCar(saab2);
 
-        assertEquals(saab1, workshop.pickUp(saab1));
+        assertEquals(saab, workshop.unloadCar(saab));
     }
 
     @Test
@@ -45,15 +42,7 @@ public class TestWorkshop {
         assertEquals(5, workshop.getY(), 0.001);
     }
 
-    @Test
-    public void testWorkShopNotAllowedCar() {
-        Workshop workshop = new Workshop(2, 0, "Workshop1", 5, 5);
-        workshop.setAllowedTypes("Saab95");
-        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
-        Volvo240 volvo = new Volvo240(2, 100, Color.black, "Volvo240", 3, 7,0);
 
-        workshop.recieveCar(volvo);
-    }
 
     @Test
     public void testGetName(){
@@ -68,8 +57,8 @@ public class TestWorkshop {
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 5, 5);
         Volvo240 volvo = new Volvo240(2, 100, Color.black, "Volvo240", 3, 7,0);
 
-        workshop.recieveCar(saab);
-        workshop.recieveCar(volvo);
+        workshop.loadCar(saab);
+
 
     }
 }

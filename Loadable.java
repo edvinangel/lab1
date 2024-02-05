@@ -58,6 +58,7 @@ public class Loadable {
             Car unloaded_car = carsLoaded.removeLast();
             unloaded_car.setX(x+1);
             unloaded_car.setY(y+1);
+            numLoaded -= 1;
         }
     }
 
@@ -72,8 +73,5 @@ public class Loadable {
     public int getNumLoaded(){
         return this.numLoaded;
     }
-
-
-
 
 }

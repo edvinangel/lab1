@@ -1,20 +1,23 @@
 import java.awt.*;
 
 public class Truck extends Car{
-    public final static Size size = Size.LARGE;
 
     public TruckPlatform truckPlatform;
 
+    public final static Size size = Size.LARGE;
+
+
     public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
-
         this.truckPlatform = new TruckPlatform(false, 0, 70, this);
+
     }
 
     @Override
     public double speedFactor() {
         return getEnginePower() * 0.01;
     }
+
 
     @Override
     public void move(){
@@ -30,6 +33,7 @@ public class Truck extends Car{
 
 
     }
+
 
     @Override
     protected Size getSize() {

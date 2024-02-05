@@ -85,7 +85,7 @@ public class TestCarTransport {
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 15,0, 10);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 15,0);
         transport.lowerPlatform();
-        transport.loadCar(saab); // Should return that it is not closed enough
+        transport.loadCar(saab);
 
 
         assertEquals( 1 , transport.load.getNumLoaded(), 0.001);

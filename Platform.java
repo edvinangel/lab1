@@ -1,7 +1,7 @@
 public class Platform {
 
     public boolean loadable;
-    private Truck truck;
+    public Truck truck;
 
 
 
