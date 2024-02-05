@@ -7,7 +7,7 @@ public class Workshop<A extends Car> implements Loadable2<A> {
     public ArrayList<A> loadedCars;
     private double x;
     private double y;
-    private String name;
+    private String name; // ta bort
     private int currentLoad;
 
 
@@ -34,7 +34,7 @@ public class Workshop<A extends Car> implements Loadable2<A> {
             }
         }
 
-        
+
         @Override
     public A unloadCar(A car){
         if (loadedCars.contains(car)){
