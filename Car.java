@@ -3,9 +3,6 @@ import java.math.BigDecimal;
 
 public abstract class Car implements Moveable {
 
-
-    public Size size;
-
     public enum Size {
         SMALL,
         MEDIUM,

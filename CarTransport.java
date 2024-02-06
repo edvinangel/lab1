@@ -14,8 +14,6 @@ public class CarTransport extends Truck implements Loadable<Car> {
         this.maxCapacity = maxCapacity;
 
         this.carsLoaded = new ArrayList<Car>();
-        this.numLoaded = 0;
-
     }
 
     public boolean getPlatformActive(){
@@ -69,7 +67,6 @@ public class CarTransport extends Truck implements Loadable<Car> {
                 Car unloaded_car = carsLoaded.removeLast();
                 unloaded_car.setX(this.getX()+1);
                 unloaded_car.setY(this.getY()+1);
-                numLoaded -= 1;
                 return unloaded_car;
             }
         }else{

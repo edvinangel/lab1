@@ -10,9 +10,8 @@ public class Workshop<A extends Car> implements Loadable<A> {
     private int currentLoad;
 
 
-    public Workshop(int maxLoad, int currentLoad,  String name, double x, double y) {
+    public Workshop(int maxLoad, String name, double x, double y) {
         this.maxLoad = maxLoad;
-        this.currentLoad = currentLoad;
         this.name = name;
         this.x = x;
         this.y = y;
@@ -23,9 +22,8 @@ public class Workshop<A extends Car> implements Loadable<A> {
 
     @Override
     public void loadCar(A car){
-        if (currentLoad < maxLoad){
+        if (loadedCars.size() < maxLoad){
                 this.loadedCars.add(car);
-                currentLoad += 1;
                 System.out.println("Car loaded");
 
             }else{
@@ -38,7 +36,6 @@ public class Workshop<A extends Car> implements Loadable<A> {
     public A unloadCar(A car){
         if (loadedCars.contains(car)){
             loadedCars.remove(car);
-            currentLoad -= 1;
             return car;
         }else{
             System.out.println("Car is not in workshop");

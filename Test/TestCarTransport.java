@@ -17,7 +17,7 @@ public class TestCarTransport {
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
-        assertEquals(carList, transport.load.getCarsLoaded());
+        assertEquals(carList, transport.getCarsLoaded());
     }
 
     @Test
@@ -29,11 +29,11 @@ public class TestCarTransport {
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
-        assertEquals(carList, transport.load.getCarsLoaded());
+        assertEquals(carList, transport.getCarsLoaded());
 
         carList.removeLast(); // Töm båda listorna
-        transport.unloadCar();
-        assertEquals(carList,transport.load.getCarsLoaded());
+        transport.unloadCar(saab);
+        assertEquals(carList,transport.getCarsLoaded());
     }
 
     @Test
@@ -79,18 +79,5 @@ public class TestCarTransport {
     }
 
 
-
-    @Test
-    public void testNumLoaded(){
-        CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 15,0, 10);
-        Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 15,0);
-        transport.lowerPlatform();
-        transport.loadCar(saab);
-
-
-        assertEquals( 1 , transport.load.getNumLoaded(), 0.001);
-        transport.unloadCar();
-        assertEquals( 0 , transport.load.getNumLoaded(), 0.001);
-    }
 
 }
