@@ -9,7 +9,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
     private int maxCapacity;
 
 
-    public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y, int maxCapacity) {
+    public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y, int maxCapacity) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
         this.maxCapacity = maxCapacity;
 

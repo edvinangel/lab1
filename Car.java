@@ -14,13 +14,13 @@ public abstract class Car implements Moveable {
     private Color color;
     private String modelName;
     public double currentSpeed; // Change to public to access in Car models
-    private double x;
-    private double y;
+    private int x;
+    private int y;
     private int x_direction, y_direction; // private förax att dölja för användning
 
 
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
+    public Car(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -69,20 +69,20 @@ public abstract class Car implements Moveable {
         return this.modelName;
     }
 
-    public double getX(){
+    public int getX(){
         return x;
     }
 
-    public double getY(){
+    public int getY(){
         return y;
     }
 
 
-    public void setX(double new_x){
+    public void setX(int new_x){
         x = new_x;
     }
 
-    public void setY(double new_y){
+    public void setY(int new_y){
         y = new_y;
     }
 

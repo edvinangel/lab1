@@ -6,7 +6,7 @@ public abstract class Truck extends Car{
     public final static Size size = Size.LARGE;
 
 
-    public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
+    public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
 
     }

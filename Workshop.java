@@ -4,13 +4,13 @@ public class Workshop<A extends Car> implements Loadable<A> {
 
     private int maxLoad;
     public ArrayList<A> loadedCars;
-    private double x;
-    private double y;
+    private int x;
+    private int y;
     private String name; // ta bort
     private int currentLoad;
 
 
-    public Workshop(int maxLoad, String name, double x, double y) {
+    public Workshop(int maxLoad, String name, int x, int y) {
         this.maxLoad = maxLoad;
         this.name = name;
         this.x = x;
@@ -22,9 +22,13 @@ public class Workshop<A extends Car> implements Loadable<A> {
 
     @Override
     public void loadCar(A car){
-        if (loadedCars.size() < maxLoad){
+        if (loadedCars.size() < maxLoad && Math.abs(car.getX() - this.getX()) < 10  && Math.abs(car.getY() - this.getY()) < 10){
+            if (!loadedCars.contains(car)){
                 this.loadedCars.add(car);
-                System.out.println("Car loaded");
+                car.currentSpeed = 0;
+                System.out.println("Car loaded");}else{
+                System.out.println("Car already in shop");
+            }
 
             }else{
                 System.out.println("Max capacity is reached");
@@ -44,10 +48,10 @@ public class Workshop<A extends Car> implements Loadable<A> {
     }
 
 
-    public double getX(){
+    public int getX(){
         return this.x;
     }
-    public double getY(){
+    public int getY(){
         return this.y;
     }
 

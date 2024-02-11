@@ -8,7 +8,7 @@ public class Volvo240 extends Car{
     public final static Size size = Size.MEDIUM;
 
 
-    public Volvo240(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, double x, double y) {
+    public Volvo240(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
     }
 
