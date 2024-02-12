@@ -109,6 +109,81 @@ public class CarView extends JFrame{
             }
         });
 
+
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(gasAmount);
+            }
+        });
+
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.stream()
+                        .filter(car -> car instanceof Saab95)
+                        .forEach(saab -> {
+                            ((Saab95) saab).setTurboOn();
+                        });
+            }
+        });
+
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.stream()
+                        .filter(car -> car instanceof Scania)
+                        .forEach(scania -> {
+                            ((Scania) scania).raisePlatform();
+                        });
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.stream()
+                        .filter(car -> car instanceof Scania)
+                        .forEach(scania -> {
+                            ((Scania) scania).lowerPlatform();
+                        });
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.stream()
+                        .filter(car -> car instanceof Saab95)
+                        .forEach(saab -> {
+                            ((Saab95) saab).setTurboOff();
+                        });
+            }
+        });
+
+
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.forEach(Car::startEngine);
+            }
+        });
+
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.cars.forEach(Car::stopEngine);
+            }
+        });
+
+
+
+
+
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
