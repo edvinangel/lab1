@@ -29,7 +29,6 @@ public class DrawPanel extends JPanel{
 
     public void loadCarImages(ArrayList<Car> cars) {
         for (Car car : cars) {
-            int x_cord = 0;
             try{
                 BufferedImage image = ImageIO.read(getClass().getResourceAsStream("pics/" + car.getModelName() + ".jpg"));
                 if (image != null){

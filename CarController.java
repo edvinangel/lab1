@@ -54,7 +54,10 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars){
-                if (!((car.getX() < -1 || car.getX() > 801 ) || (car.getY() < -1 || car.getY() > 541 ))){
+                double height = frame.drawPanel.carImageMap.get(car).getHeight();
+                double width = frame.drawPanel.carImageMap.get(car).getWidth();
+
+                if (!((car.getX()  < -1 || car.getX()  > 801 ) || (car.getY() < -1 || car.getY() > 541 ))){
                     frame.drawPanel.moveit(car);
                     check_workshop_collision(car);
 
@@ -78,7 +81,7 @@ public class CarController {
 
     void check_workshop_collision(Car car){
         shops.forEach((workshop) -> {
-            if (car.getX() == workshop.getX() && car.getY() == workshop.getY()){
+            if ((car.getX() == workshop.getX() && (car.getY() == workshop.getY()))){
                 try{
                     workshop.loadCar((Volvo240) car);
                     car.stopEngine();

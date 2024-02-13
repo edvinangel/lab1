@@ -10,7 +10,7 @@ public abstract class Car implements Moveable {
     };
     
     private int nrDoors;
-    public final double enginePower; //Change to public to access in Car models
+    public final double enginePower;
     private Color color;
     private String modelName;
     public double currentSpeed; // Change to public to access in Car models
@@ -140,7 +140,7 @@ public abstract class Car implements Moveable {
         y += y_direction * currentSpeed;
     }
 
-    public void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         if (getCurrentSpeed() >= enginePower) {
             currentSpeed = enginePower;
             System.out.println("The speed is maxed out");
@@ -150,7 +150,7 @@ public abstract class Car implements Moveable {
     }
 
     // Handling decreasing speed
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         if (getCurrentSpeed() <= 0) {
             currentSpeed = 0;
             System.out.println("Car is already still");
