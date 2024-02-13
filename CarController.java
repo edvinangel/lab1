@@ -56,8 +56,11 @@ public class CarController {
             for (Car car : cars){
                 double height = frame.drawPanel.carImageMap.get(car).getHeight();
                 double width = frame.drawPanel.carImageMap.get(car).getWidth();
+                double panelWidth = frame.drawPanel.getWidth();
+                double panelHeight = frame.drawPanel.getHeight();
 
-                if (!((car.getX()  < -1 || car.getX()  > 801 ) || (car.getY() < -1 || car.getY() > 541 ))){
+
+                if (!((car.getX()  < -1 || car.getX() + height   > panelWidth ) || (car.getY()  < -1 || car.getY() + height  > panelHeight ))){
                     frame.drawPanel.moveit(car);
                     check_workshop_collision(car);
 
