@@ -1,23 +1,23 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarTransport extends Truck implements Loadable<Car> {
-
-    private boolean platformActive = true;
-
+public class CarTransport extends Truck implements Loadable<Car>{
     private ArrayList<Car> carsLoaded; // private
     private int maxCapacity;
+
+    private CarPlatform platform;
 
 
     public CarTransport(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y, int maxCapacity) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);
         this.maxCapacity = maxCapacity;
-
         this.carsLoaded = new ArrayList<Car>();
+
+        this.platform = new CarPlatform(false);
     }
 
     public boolean getPlatformActive(){
-        return platformActive;
+        return platform.active;
     }
 
 
@@ -28,7 +28,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
             this.moveCars();
 
         }else{
-        System.out.println("Can not move when platform is lowered");
+            System.out.println("Can not move when platform is lowered");
         }
 
     }
@@ -39,11 +39,10 @@ public class CarTransport extends Truck implements Loadable<Car> {
 
     @Override
     public void loadCar(Car car) {
-        if (platformActive) {
+        if (platform.active) {
             if ((car.getSize() == Size.MEDIUM || car.getSize() == Size.SMALL)) {
                 if (maxCapacity > (carsLoaded.size() + 1)){
                     if (Math.abs(car.getX() - this.getX()) < 5  && Math.abs(car.getY() - this.getY()) < 5){
-
                         carsLoaded.add(car);
                         System.out.println("Car loaded");
                     }else{
@@ -85,22 +84,20 @@ public class CarTransport extends Truck implements Loadable<Car> {
     }
 
 
-    public void lowerPlatform(){
+    public void lowerBed(){
         if (currentSpeed != 0){
             System.out.println("Car cannot move when lowering platform");
         }else{
-            platformActive = true;
-
+            platform.lowerPlatform();
         }
     }
 
-    public void raisePlatform(){
+    public void raiseBed(){
         if (currentSpeed != 0){
             System.out.println("Car cannot move when raising platform");
         }else{
-            platformActive = false;
+            platform.raisePlatform();
         }
     }
 }
-
 

@@ -13,7 +13,7 @@ public class TestCarTransport {
 
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
@@ -25,7 +25,7 @@ public class TestCarTransport {
 
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         List<Car> carList = new ArrayList<>();
         carList.add(saab);
         transport.loadCar(saab);
@@ -41,7 +41,7 @@ public class TestCarTransport {
 
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 10);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         transport.loadCar(saab);
 
         transport.startEngine();
@@ -57,7 +57,7 @@ public class TestCarTransport {
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 1);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
         Saab95 saab1 = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         transport.loadCar(saab); // Should return car loaded
         transport.loadCar(saab1); // Should return max capacity reached
     }
@@ -66,7 +66,7 @@ public class TestCarTransport {
     public void testSizeToBig(){
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 7,0, 1);
         Scania scania= new Scania(2, 100, Color.black, "Scania", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         transport.loadCar(scania); // Should say that size is too big
     }
 
@@ -74,7 +74,7 @@ public class TestCarTransport {
     public void testNotCloseEnough(){
         CarTransport transport = new CarTransport(2, 500, Color.black, "Transport", 0, 15,0, 10);
         Saab95 saab = new Saab95(2, 100, Color.black, "Saab95", 10, 7,0);
-        transport.lowerPlatform();
+        transport.lowerBed();
         transport.loadCar(saab); // Should return that it is not closed enough
     }
 

@@ -22,8 +22,8 @@ public abstract class Truck extends Car{
         return size;
     }
 
-    public abstract void lowerPlatform();
-    public abstract void raisePlatform();
+    public abstract void raiseBed();
+    public abstract void lowerBed();
 
 
 

@@ -137,7 +137,7 @@ public class CarView extends JFrame{
                 carC.cars.stream()
                         .filter(car -> car instanceof Scania)
                         .forEach(scania -> {
-                            ((Scania) scania).raisePlatform();
+                            ((Scania) scania).raiseBed();
                         });
             }
         });
@@ -148,7 +148,7 @@ public class CarView extends JFrame{
                 carC.cars.stream()
                         .filter(car -> car instanceof Scania)
                         .forEach(scania -> {
-                            ((Scania) scania).lowerPlatform();
+                            ((Scania) scania).lowerBed();
                         });
             }
         });

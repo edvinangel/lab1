@@ -60,10 +60,9 @@ public class CarController {
                 double panelHeight = frame.drawPanel.getHeight();
 
 
-                if (!((car.getX()  < -1 || car.getX() + height   > panelWidth ) || (car.getY()  < -1 || car.getY() + height  > panelHeight ))){
+                if (!((car.getX()  < -1 || car.getX() + width   > panelWidth ) || (car.getY()  < -1 || car.getY() + height  > panelHeight ))){
                     frame.drawPanel.moveit(car);
                     check_workshop_collision(car);
-
                 }else{
                     handleCollision(car);
                     frame.drawPanel.moveit(car);
