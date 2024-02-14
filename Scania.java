@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Scania extends Truck {
-    public TruckPlatform platform;
+    protected TruckPlatform platform;
 
     public Scania(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y) {
         super(nrDoors, enginePower, color, modelName, currentSpeed, x, y);

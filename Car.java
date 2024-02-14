@@ -8,11 +8,11 @@ public abstract class Car implements Moveable {
         MEDIUM,
         LARGE
     };
-    
-    private int nrDoors;
-    public final double enginePower;
-    private Color color;
-    private String modelName;
+
+    public int nrDoors;
+    protected final double enginePower;
+    protected Color color;
+    public String modelName;
     public double currentSpeed; // Change to public to access in Car models
     private int x;
     private int y;

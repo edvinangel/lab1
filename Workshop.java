@@ -2,12 +2,11 @@ import java.util.ArrayList;
 
 public class Workshop<A extends Car> implements Loadable<A> {
 
-    private int maxLoad;
-    public ArrayList<A> loadedCars;
+    private final int maxLoad;
+    private ArrayList<A> loadedCars;
     private int x;
     private int y;
     private String name; // ta bort
-    private int currentLoad;
 
 
     public Workshop(int maxLoad, String name, int x, int y) {
@@ -47,6 +46,10 @@ public class Workshop<A extends Car> implements Loadable<A> {
         return null;
     }
 
+
+    public ArrayList<A> getLoadedCars(){
+        return loadedCars;
+    }
 
     public int getX(){
         return this.x;

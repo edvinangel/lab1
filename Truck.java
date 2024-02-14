@@ -3,7 +3,7 @@ import java.awt.*;
 public abstract class Truck extends Car{
 
 
-    public final static Size size = Size.LARGE;
+    private final static Size size = Size.LARGE;
 
 
     public Truck(int nrDoors, double enginePower, Color color, String modelName, double currentSpeed, int x, int y) {
@@ -12,7 +12,7 @@ public abstract class Truck extends Car{
     }
 
     @Override
-    public double speedFactor() {
+    protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
 

@@ -36,13 +36,16 @@ public class CarController {
         cc.cars.add(new Saab95(2, 300, Color.red, "Saab95", 0, 0, 100));
         cc.cars.add(new Scania(4, 200, Color.black, "Scania", 0, 0, 200));
 
-        cc.shops.add(new Workshop<Volvo240>(10, "VolvoBrand", 200, 400));
+        cc.shops.add(new Workshop<Volvo240>(10, "VolvoBrand", 0, 300));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
         cc.frame.drawPanel.loadCarImages(cc.cars);
         cc.frame.drawPanel.loadWorkshopImages(cc.shops);
 
+        // Game
+        // Rita upp panel
+        // Carview - carcontroller
 
         // Start the timer
         cc.timer.start();
